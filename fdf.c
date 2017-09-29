@@ -6,11 +6,37 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 15:09:48 by enunes            #+#    #+#             */
-/*   Updated: 2017/09/28 16:53:40 by enunes           ###   ########.fr       */
+/*   Updated: 2017/09/28 21:03:38 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void		set_env(t_fdf *f)
+{
+	if (f->map_x > f->map_y)
+		f->win_x = (f->map_x * 10);
+	else
+		f->win_x = (f->map_y * 10);
+	if (f->win_x < 800)
+		f->win_x = 800;
+	if (f->win_x > 1920)
+		f->win_x = 1920;
+	f->win_y = (f->win_x * 9) / 16;
+	if (f->map_x > f->map_y)
+		f->zoom = f->win_y / f->map_x;
+	else
+		f->zoom = f->win_y / f->map_y;
+	if (!f->zoom)
+		f->zoom = 2;
+	f->height = 1;
+	f->pos_x = 30;
+	f->pos_y = 0;
+	f->pos_z = 0;
+	f->color = 0xFFFFFF;
+}
+
+
 
 int		main(int ac, char **av)
 {
@@ -19,8 +45,15 @@ int		main(int ac, char **av)
 	if (ac != 2)
 		ft_error("Error");
 	fdf.name = ft_strdup(av[1]);
-	fdf.y = 0;
-	fdf.x = 0;
-	fdf.max = 0;
-
+	fdf.map_y = 0;
+	fdf.map_x = 0;
+	fdf.map_max = 0;
+	parse_map(&fdf);
+	set_env(&fdf);
+	fdf.env.mlx = mlx.init();
+	fdf.env.mlx = mlx_new_window(fdf.env.mlx, fdf.win_x, fdf.win_y, "42-fdf");
+	gen_img(&fdf);
+	mlx_hook(fdf.env.win, 2, (1L << 0), &keybind, &fdf);
+	mlx_loop(fdf.env.mlx);
+	return (0);
 }
