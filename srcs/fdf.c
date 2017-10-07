@@ -6,13 +6,13 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 15:09:48 by enunes            #+#    #+#             */
-/*   Updated: 2017/09/28 21:03:38 by enunes           ###   ########.fr       */
+/*   Updated: 2017/10/06 08:43:51 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void		set_env(t_fdf *f)
+void		set_env(t_fdf *f)
 {
 	if (f->map_x > f->map_y)
 		f->win_x = (f->map_x * 10);
@@ -43,7 +43,7 @@ int		main(int ac, char **av)
 	t_fdf	fdf;
 
 	if (ac != 2)
-		ft_error("Error");
+		error("Error");
 	fdf.name = ft_strdup(av[1]);
 	fdf.map_y = 0;
 	fdf.map_x = 0;
