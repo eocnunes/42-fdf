@@ -6,7 +6,7 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 15:09:48 by enunes            #+#    #+#             */
-/*   Updated: 2017/10/06 08:43:51 by enunes           ###   ########.fr       */
+/*   Updated: 2017/10/07 02:24:42 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void		set_env(t_fdf *f)
 	f->pos_y = 0;
 	f->pos_z = 0;
 	f->color = 0xFFFFFF;
+	f->speed = 3;
 }
 
 
@@ -43,7 +44,7 @@ int		main(int ac, char **av)
 	t_fdf	fdf;
 
 	if (ac != 2)
-		error("Error");
+		error(ERR_ARG);
 	fdf.name = ft_strdup(av[1]);
 	fdf.map_y = 0;
 	fdf.map_x = 0;
@@ -51,8 +52,9 @@ int		main(int ac, char **av)
 	parse_map(&fdf);
 	set_env(&fdf);
 	fdf.env.mlx = mlx.init();
-	fdf.env.mlx = mlx_new_window(fdf.env.mlx, fdf.win_x, fdf.win_y, "42-fdf");
-	gen_img(&fdf);
+	fdf.env.win = mlx_new_window(fdf.env.mlx, fdf.win_x, fdf.win_y, "42-fdf");
+	img_gen(&fdf);
+	controls();
 	mlx_hook(fdf.env.win, 2, (1L << 0), &keybind, &fdf);
 	mlx_loop(fdf.env.mlx);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 22:51:33 by enunes            #+#    #+#             */
-/*   Updated: 2017/10/06 22:20:15 by enunes           ###   ########.fr       */
+/*   Updated: 2017/10/07 01:54:31 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,29 @@ void		fill_map(t_fdf *f, int x, int y)
 {
 	int		fd;
 	char	*line;
-	char	*tmp;
-	char	**splitted;
+	char	*temp;
+	char	**row;
 
 	if ((fd = open(f->name, O_RDONLY)) < 0)
 		error(ERR_OPEN);
 	while (get_next_line(fd, &line))
 	{
-		tmp = ft_strtrim(line);
-		splitted = ft_strsplit(tmp, ' ');
+		temp = ft_strtrim(line);
+		row = ft_strsplit(temp, ' ');
 		if (line)
 			ft_memdel((void *)&line);
-		if (tmp)
-			ft_memdel((void *)&tmp);
+		if (temp)
+			ft_memdel((void *)&temp);
 		x = 0;
-		while (x < f->map_x && splitted[x])
+		while (x < f->map_x && row[x])
 		{
-			f->map[y][x].h1 = ft_atoi(splitted[x]);
+			f->map[y][x].h1 = ft_atoi(row[x]);
 			if (f->map[y][x].h1 > f->map_max)
 				f->map_max = f->map[y][x].h1;
 			x++;
 		}
-		if (splitted)
-			ft_sstrdel(splitted);
+		if (row)
+			sstrdel(row);
 		y++;
 	}
 	close(fd);
@@ -78,7 +78,7 @@ void		alloc_map(t_fdf *f, int i)
 
 void	parse_map(t_fdf *f)
 {
-	char	**splitted;
+	char	**row;
 	char	*line;
 	char	*temp;
 	int		fd;
@@ -90,7 +90,7 @@ void	parse_map(t_fdf *f)
 	while (get_next_line(fd, &line))
 	{
 		temp = ft_strtrim(line);
-		splitted = ft_strsplit(temp, ' ');
+		row = ft_strsplit(temp, ' ');
 		if (line)
 			ft_memdel((void *)&line);
 		if (!ft_isnum(temp))
@@ -98,11 +98,11 @@ void	parse_map(t_fdf *f)
 		if (temp)
 			ft_memdel((void *)&temp);
 		if (f->map_x == 0)
-			f->map_x = ft_sstrlen(splitted);
-		if (f->map_x != ft_sstrlen(splitted))
+			f->map_x = sstrlen(row);
+		if (f->map_x != sstrlen(row))
 			error(ERR_MAP);
-		if	(splitted)
-			ft_sstrdel(splitted) : (0);
+		if	(row)
+			sstrdel(row) : (0);
 		f->map_y++;
 	}
 	close(fd);

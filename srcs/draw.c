@@ -6,7 +6,7 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 07:41:29 by enunes            #+#    #+#             */
-/*   Updated: 2017/10/06 22:19:42 by enunes           ###   ########.fr       */
+/*   Updated: 2017/10/07 02:02:10 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	straight(t_fdf *f, t_pxl a, t_pxl b, int sense)
 			sense = 1;
 		while (a.x != b.x)
 		{
-			fdf_mlx_img(f, a);
+			mlx_img(f, a);
 			a.x += sense;
 		}
-		fdf_mlx_img(f, a);
+		mlx_img(f, a);
 	}
 	else
 	{
@@ -35,10 +35,10 @@ void	straight(t_fdf *f, t_pxl a, t_pxl b, int sense)
 			sense = 1;
 		while (a.y != b.y)
 		{
-			fdf_mlx_img(f, a);
+			mlx_img(f, a);
 			a.y += sense;
 		}
-		fdf_mlx_img(f, a);
+		mlx_img(f, a);
 	}
 }
 
@@ -54,12 +54,12 @@ void	diag_y(t_fdf *f, t_pxl steps, t_pxl point, float m)
 	start = point.x;
 	a.x = start;
 	a.y = i;
-	fdf_mlx_img(f, a);
+	mlx_img(f, a);
 	while (i <= n)
 	{
 		a.x = start;
 		a.y = i;
-		fdf_mlx_img(f, a);
+		mlx_img(f, a);
 		start += m;
 		i++;
 	}
@@ -77,12 +77,12 @@ void	diag_x(t_fdf *f, t_pxl steps, t_pxl point, float m)
 	start = point.y;
 	a.x = i;
 	a.y = start;
-	fdf_mlx_img(f, a);
+	mlx_img(f, a);
 	while (i <= n)
 	{
 		a.x = i;
 		a.y = start;
-		fdf_mlx_img(f, a);
+		mlx_img(f, a);
 		start += m;
 		i++;
 	}
@@ -94,7 +94,7 @@ void		join_pxl(t_fdf *f, t_pxl px_a, t_pxl px_b)
 	t_pxl	shift;
 
 	if (px_a.x == px_b.x || px_a.y == px_b.y)
-		fdf_straight(f, px_a, px_b, 0);
+		straight(f, px_a, px_b, 0);
 	else if (abs(px_a.x - px_b.x) > abs(px_a.y - px_b.y))
 	{
 		m = ((float)(px_b.y - px_a.y)) / (px_b.x - px_a.x);
@@ -111,13 +111,13 @@ void		join_pxl(t_fdf *f, t_pxl px_a, t_pxl px_b)
 	}
 }
 
-void		gen_img(t_fdf *f)
+void		img_gen(t_fdf *f)
 {
 	int y;
 	int x;
 
-	fdf_recalc(f, 0, 0);
-	f->mlx.img = mlx_new_image(f->mlx.mlx, f->win_x, f->win_y);
+	recalc(f, 0, 0);
+	f->mlx.img = mlx_new_image(f->env.mlx, f->win_x, f->win_y);
 	y = 0;
 	while (y < f->map_y)
 	{
@@ -132,9 +132,9 @@ void		gen_img(t_fdf *f)
 		}
 		y++;
 	}
-	mlx_put_image_to_window(f->mlx.mlx, f->mlx.win, f->mlx.img, 0, 0);
-	mlx_destroy_image(f->mlx.mlx, f->mlx.img);
-	fdf_screeninfo(f);
+	mlx_put_image_to_window(f->env.mlx, f->env.win, f->env.img, 0, 0);
+	mlx_destroy_image(f->env.mlx, f->env.img);
+	screeninfo(f);
 }
 
 

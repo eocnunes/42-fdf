@@ -6,7 +6,7 @@
 #    By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/06 21:27:58 by enunes            #+#    #+#              #
-#    Updated: 2017/10/06 23:22:40 by enunes           ###   ########.fr        #
+#    Updated: 2017/10/07 02:13:00 by enunes           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ N_SRCS =	fdf.c		\
 			calculate.c	\
 			draw.c		\
 			screen.c	\
+			keys.c		\
+			tools.c		\
 
 X_LFT = -L$(P_LFT) -lft
 X_MLX = -L$(P_MLX) -lmlx -framework OpenGL -framework AppKit

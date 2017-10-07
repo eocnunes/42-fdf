@@ -6,13 +6,13 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 19:05:39 by enunes            #+#    #+#             */
-/*   Updated: 2017/10/06 22:20:00 by enunes           ###   ########.fr       */
+/*   Updated: 2017/10/07 01:15:06 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	instructions(void)
+void	controls(void)
 {
 	ft_putendl("\e[1;32mOK\e[0m\n");
 	ft_putendl("\t  FDF is controlled with the");
@@ -39,7 +39,7 @@ void	instructions(void)
 	ft_putendl("\n\t  \e[1;104;97m Press [ESC] to quit FDF \e[0m\n\n");
 }
 
-int		fdf_keyhook(int key, t_fdf *f)
+int		keybind(int key, t_fdf *f)
 {
 	f->pos_x >= 360 ? f->pos_x -= 360 : (0);
 	f->pos_y >= 360 ? f->pos_y -= 360 : (0);
@@ -48,7 +48,7 @@ int		fdf_keyhook(int key, t_fdf *f)
 	f->pos_y <= -360 ? f->pos_y += 360 : (0);
 	f->pos_z <= -360 ? f->pos_z += 360 : (0);
 	(key == ESC) ? exit(0) : (0);
-	(key == RESET) ? fdf_defaults(f) : (0);
+	(key == RESET) ? set_env(f) : (0);
 	(key == HPOS) ? f->height++ : (0);
 	(key == HNEG && f->height) ? f->height-- : (0);
 	(key == SPOS && f->speed < 10) ? f->speed++ : (0);
@@ -61,6 +61,6 @@ int		fdf_keyhook(int key, t_fdf *f)
 	(key == RPOS) ? f->pos_z -= f->speed : (0);
 	((f->height * f->map_max) > (f->win_y / 2)) ? f->height-- : (0);
 	(!f->height) ? f->height++ : (0);
-	fdf_img_gen(f);
+	img_gen(f);
 	return (0);
 }

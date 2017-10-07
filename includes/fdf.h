@@ -6,7 +6,7 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 16:53:11 by enunes            #+#    #+#             */
-/*   Updated: 2017/10/06 19:26:01 by enunes           ###   ########.fr       */
+/*   Updated: 2017/10/07 02:29:30 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # include <mlx.h>
 # include <math.h>
+# include "fcntl.h"
 
 # define	ERR_ARG			"Error. Usage: ./fdf map.fdf"
 # define	ERR_OPEN		"Error: failed to open file."
@@ -66,11 +67,14 @@ typedef	struct	s_mlx
 typedef struct	s_fdf
 {
 	char		*name;
+	int			win_x;
+	int			win_y;
 	int			map_x;
 	int			map_y;
-	int			max;
+	int			map_max;
 	int			height;
 	int			zoom;
+	int			speed;
 	int			color;
 	float		pos_x;
 	float		pos_y;
@@ -89,16 +93,31 @@ void	alloc_map(t_fdf, int i);
 int		checkch(char *str);
 void	fill_map(t_fdf *f, int x, int y);
 
-/* --------------------- draw.c ---------------------- */
-void	gen_img(t_fdf *f);
+/* --------------------- draw.c --------------------- */
+void	img_gen(t_fdf *f);
 void	join_pxl(t_fdf *f, t_pxl px_a, t_pxl px_b);
 void	diag_x(t_fdf *f, t_pxl steps, t_pxl point, float m);
 void	diag_y(t_fdf *f, t_pxl steps, t_pxl point, float m);
 void	straight(t_fdf *f, t_pxl a, t_pxl b, int sense);
 
 /* --------------------- draw.c ---------------------- */
-int		fdf_mlx_img(t_fdf *f, t_pxl a);
-void	fdf_recalc(t_fdf *f, int x, int y);
-void	fdf_shifting(t_fdf *f, t_pxl *px);
+int		mlx_img(t_fdf *f, t_pxl a);
+void	recalc(t_fdf *f, int x, int y);
+void	shifting(t_fdf *f, t_pxl *px);
+
+/* --------------------- keys.c ---------------------- */
+int		keybind(int key, t_fdf *f);
+void	controls(void);
+
+/* --------------------- tools.c --------------------- */
+void	error(char *message);
+void	sstrdel(char **s);
+int		sstrlen(char **s);
+
+/* --------------------- tools.c --------------------- */
+void	screeninfo(t_fdf *f);
+void	data_msize(t_fdf *f);
+void	data_xyz(t_fdf *f, int off_x);
+void	data_var(t_fdf *f, int off_x, int off_y);
 
 #endif

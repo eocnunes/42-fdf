@@ -6,13 +6,13 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 08:29:38 by enunes            #+#    #+#             */
-/*   Updated: 2017/10/06 22:19:18 by enunes           ###   ########.fr       */
+/*   Updated: 2017/10/07 02:02:44 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void		fdf_shifting(t_fdf *f, t_pxl *px)
+void		shifting(t_fdf *f, t_pxl *px)
 {
 	float	angle;
 	float	x[2];
@@ -34,7 +34,7 @@ void		fdf_shifting(t_fdf *f, t_pxl *px)
 	px->y1 = round(x[1]);
 }
 
-void			fdf_recalc(t_fdf *f, int x, int y)
+void			recalc(t_fdf *f, int x, int y)
 {
 	t_line	tmp;
 
@@ -47,7 +47,7 @@ void			fdf_recalc(t_fdf *f, int x, int y)
 			f->map[y][x].x1 = f->zoom * (x - f->map_x / 2);
 			f->map[y][x].y1 = f->zoom * (y - f->map_y / 2);
 			f->map[y][x].h = f->map[y][x].h1 * f->height;
-			fdf_shifting(f, &f->map[y][x]);
+			shifting(f, &f->map[y][x]);
 			tmp.a = f->map[y][x].x1;
 			tmp.b = f->map[y][x].y1;
 			tmp.c = f->map[y][x].h - 1000;
@@ -61,7 +61,7 @@ void			fdf_recalc(t_fdf *f, int x, int y)
 	}
 }
 
-int				fdf_mlx_img(t_fdf *f, t_pxl a)
+int				mlx_img(t_fdf *f, t_pxl a)
 {
 	char	*px;
 	int		bpp;
@@ -72,7 +72,7 @@ int				fdf_mlx_img(t_fdf *f, t_pxl a)
 	if (a.x >= f->win_x || a.y >= f->win_y || a.x < 0 || a.y < 0)
 		return (1);
 	i = 0;
-	px = mlx_get_data_addr(f->mlx.img, &bpp, &len, &endian);
+	px = mlx_get_data_addr(f->env.img, &bpp, &len, &endian);
 	if (endian == 0)
 		while (i != bpp / 8)
 		{
