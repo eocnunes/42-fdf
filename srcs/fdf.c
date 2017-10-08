@@ -6,7 +6,7 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 15:09:48 by enunes            #+#    #+#             */
-/*   Updated: 2017/10/07 20:39:41 by enunes           ###   ########.fr       */
+/*   Updated: 2017/10/08 06:28:38 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,15 @@ void		set_env(t_fdf *f)
 		f->zoom = f->win_y / f->map_y;
 	if (!f->zoom)
 		f->zoom = 2;
-	f->height = 1;
+	f->height = 5;
 	f->pos_x = 30;
-	f->pos_y = 0;
+	f->pos_y = 30;
 	f->pos_z = 0;
 	f->color = 0xFFFFFF;
 	f->speed = 3;
 }
 
-
-
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	t_fdf	fdf;
 
@@ -54,7 +52,7 @@ int		main(int ac, char **av)
 	fdf.env.mlx = mlx_init();
 	fdf.env.win = mlx_new_window(fdf.env.mlx, fdf.win_x, fdf.win_y, "42-fdf");
 	img_gen(&fdf);
-	controls();
+	controlpanel();
 	mlx_hook(fdf.env.win, 2, (1L << 0), &keybind, &fdf);
 	mlx_loop(fdf.env.mlx);
 	return (0);

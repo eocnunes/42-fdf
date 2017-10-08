@@ -6,7 +6,7 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 22:51:33 by enunes            #+#    #+#             */
-/*   Updated: 2017/10/07 20:42:12 by enunes           ###   ########.fr       */
+/*   Updated: 2017/10/08 06:44:37 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ void		fill_map(t_fdf *f, int x, int y)
 	{
 		temp = ft_strtrim(line);
 		row = ft_strsplit(temp, ' ');
-		if (line)
-			ft_memdel((void *)&line);
-		if (temp)
-			ft_memdel((void *)&temp);
+		line ? ft_memdel((void *)&line) : (0);
+		temp ? ft_memdel((void *)&temp) : (0);
 		x = 0;
 		while (x < f->map_x && row[x])
 		{
@@ -37,14 +35,13 @@ void		fill_map(t_fdf *f, int x, int y)
 				f->map_max = f->map[y][x].h1;
 			x++;
 		}
-		if (row)
-			sstrdel(row);
+		row ? sstrdel(row) : (0);
 		y++;
 	}
 	close(fd);
 }
 
-int		checkch(char *str)
+int			checkch(char *str)
 {
 	int t;
 
@@ -64,19 +61,19 @@ int		checkch(char *str)
 void		alloc_map(t_fdf *f, int i)
 {
 	if ((f->map_x * f->map_y) > 1000000)
-		 error(ERR_MAP);
+		error(ERR_MAP);
 	if (!(f->map = (t_pxl **)malloc(sizeof(t_pxl *) * f->map_y)))
 		error(ERR_MALLOC);
 	while (i < f->map_y)
-		{
-			if (!(f->map[i] = (t_pxl *)malloc(sizeof(t_pxl) * f->map_x)))
-				error(ERR_MALLOC);
-			i++;
-		}
+	{
+		if (!(f->map[i] = (t_pxl *)malloc(sizeof(t_pxl) * f->map_x)))
+			error(ERR_MALLOC);
+		i++;
+	}
 	fill_map(f, 0, 0);
 }
 
-void	parse_map(t_fdf *f)
+void		parse_map(t_fdf *f)
 {
 	char	**row;
 	char	*line;
@@ -91,18 +88,13 @@ void	parse_map(t_fdf *f)
 	{
 		temp = ft_strtrim(line);
 		row = ft_strsplit(temp, ' ');
-		if (line)
-			ft_memdel((void *)&line);
+		line ? ft_memdel((void *)&line) : (0);
 		if (!checkch(temp))
 			error(ERR_MAP);
-		if (temp)
-			ft_memdel((void *)&temp);
-		if (f->map_x == 0)
-			f->map_x = sstrlen(row);
-		if (f->map_x != sstrlen(row))
-			error(ERR_MAP);
-		if	(row)
-			sstrdel(row);
+		temp ? ft_memdel((void *)&temp) : (0);
+		(f->map_x == 0) ? (f->map_x = sstrlen(row)) : (0);
+		(f->map_x != sstrlen(row)) ? error(ERR_MAP) : (0);
+		row ? sstrdel(row) : (0);
 		f->map_y++;
 	}
 	close(fd);

@@ -6,7 +6,7 @@
 #    By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/06 21:27:58 by enunes            #+#    #+#              #
-#    Updated: 2017/10/07 21:01:22 by enunes           ###   ########.fr        #
+#    Updated: 2017/10/08 05:15:41 by enunes           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,22 +48,19 @@ $(OBJ_DIR)%.o:$(SRC_DIR)%.c
 	@echo -n ██████
 
 $(LIBFT):
-	@echo "\033[32mCompiling libft..."
 	@make -C $(LIBFT_DIR)
-	@echo "\033[1;4;32mlibft created.\033[0m"
+	@echo "\033[32mlibft created!\033[0m"
 
 $(MLX):
-	@echo "\033[32mCompiling mlx...\033[0m"
 	@make -C $(MLX_DIR)
-	@echo "\033[1;4;32mmlx created.\033[0m"
-	@echo  "\033[32mCompiling fdf..."
+	@echo "\033[1;4;32mMlx created!\033[0m"
+	@echo  "\033[32mCompiling..."
 
 $(NAME): $(OBJ)
 	@gcc $(CFLAGS) $(OBJ) $(LINK) -lm -o $(NAME)
 	@echo "\033[1;4;32m\n$(NAME) Created.\033[0m"
 
 clean:
-	@echo "\033[31mRemoving objects...\033[0m"
 	@rm -rf $(OBJ_DIR)
 	@make -C $(LIBFT_DIR) clean
 	@make -C $(MLX_DIR) clean

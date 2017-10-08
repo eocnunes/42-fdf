@@ -6,20 +6,17 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 07:41:29 by enunes            #+#    #+#             */
-/*   Updated: 2017/10/07 21:00:17 by enunes           ###   ########.fr       */
+/*   Updated: 2017/10/08 06:48:07 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	straight(t_fdf *f, t_pxl a, t_pxl b, int sense)
+void		straight(t_fdf *f, t_pxl a, t_pxl b, int sense)
 {
 	if (a.y == b.y)
 	{
-		if (a.x > b.x)
-			sense = -1; 
-		else
-			sense = 1;
+		sense = (a.x > b.x) ? (-1) : (1);
 		while (a.x != b.x)
 		{
 			mlx_img(f, a);
@@ -29,10 +26,7 @@ void	straight(t_fdf *f, t_pxl a, t_pxl b, int sense)
 	}
 	else
 	{
-		if (a.y > b.y)
-			sense = -1;
-		else
-			sense = 1;
+		sense = (a.y > b.y) ? (-1) : (1);
 		while (a.y != b.y)
 		{
 			mlx_img(f, a);
@@ -42,7 +36,7 @@ void	straight(t_fdf *f, t_pxl a, t_pxl b, int sense)
 	}
 }
 
-void	diag_y(t_fdf *f, t_pxl steps, t_pxl point, float m)
+void		diag_y(t_fdf *f, t_pxl steps, t_pxl point, float m)
 {
 	float	start;
 	int		i;
@@ -65,7 +59,7 @@ void	diag_y(t_fdf *f, t_pxl steps, t_pxl point, float m)
 	}
 }
 
-void	diag_x(t_fdf *f, t_pxl steps, t_pxl point, float m)
+void		diag_x(t_fdf *f, t_pxl steps, t_pxl point, float m)
 {
 	float	start;
 	int		i;
@@ -136,5 +130,3 @@ void		img_gen(t_fdf *f)
 	mlx_destroy_image(f->env.mlx, f->env.img);
 	screeninfo(f);
 }
-
-

@@ -6,13 +6,13 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 08:29:38 by enunes            #+#    #+#             */
-/*   Updated: 2017/10/07 20:59:49 by enunes           ###   ########.fr       */
+/*   Updated: 2017/10/08 06:57:03 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void		shifting(t_fdf *f, t_pxl *px)
+void			shifting(t_fdf *f, t_pxl *px)
 {
 	float	angle;
 	float	x[2];
@@ -76,10 +76,14 @@ int				mlx_img(t_fdf *f, t_pxl a)
 	if (endian == 0)
 		while (i != bpp / 8)
 		{
-			px[a.y * len + a.x * (bpp / 8) + i++] = (0x000000FF & f->color);
-			px[a.y * len + a.x * (bpp / 8) + i++] = (0x0000FF00 & f->color) >> 8;
-			px[a.y * len + a.x * (bpp / 8) + i++] = (0x00FF0000 & f->color) >> 16;
-			px[a.y * len + a.x * (bpp / 8) + i++] = (0xFF000000 & f->color) >> 24;
+			px[a.y * len + a.x * (bpp / 8) + i++] =
+				(0x000000FF & f->color);
+			px[a.y * len + a.x * (bpp / 8) + i++] =
+				(0x0000FF00 & f->color) >> 8;
+			px[a.y * len + a.x * (bpp / 8) + i++] =
+				(0x00FF0000 & f->color) >> 16;
+			px[a.y * len + a.x * (bpp / 8) + i++] =
+				(0xFF000000 & f->color) >> 24;
 		}
 	return (0);
 }
