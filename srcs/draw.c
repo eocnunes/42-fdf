@@ -6,7 +6,7 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 07:41:29 by enunes            #+#    #+#             */
-/*   Updated: 2017/10/07 02:02:10 by enunes           ###   ########.fr       */
+/*   Updated: 2017/10/07 21:00:17 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void		img_gen(t_fdf *f)
 	int x;
 
 	recalc(f, 0, 0);
-	f->mlx.img = mlx_new_image(f->env.mlx, f->win_x, f->win_y);
+	f->env.img = mlx_new_image(f->env.mlx, f->win_x, f->win_y);
 	y = 0;
 	while (y < f->map_y)
 	{

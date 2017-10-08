@@ -6,7 +6,7 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 22:51:33 by enunes            #+#    #+#             */
-/*   Updated: 2017/10/07 01:54:31 by enunes           ###   ########.fr       */
+/*   Updated: 2017/10/07 20:42:12 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	parse_map(t_fdf *f)
 		row = ft_strsplit(temp, ' ');
 		if (line)
 			ft_memdel((void *)&line);
-		if (!ft_isnum(temp))
+		if (!checkch(temp))
 			error(ERR_MAP);
 		if (temp)
 			ft_memdel((void *)&temp);
@@ -102,7 +102,7 @@ void	parse_map(t_fdf *f)
 		if (f->map_x != sstrlen(row))
 			error(ERR_MAP);
 		if	(row)
-			sstrdel(row) : (0);
+			sstrdel(row);
 		f->map_y++;
 	}
 	close(fd);

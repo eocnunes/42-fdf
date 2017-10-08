@@ -6,7 +6,7 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 20:06:54 by enunes            #+#    #+#             */
-/*   Updated: 2017/06/26 19:44:10 by enunes           ###   ########.fr       */
+/*   Updated: 2017/10/07 20:51:52 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <stddef.h>
 # include <string.h>
 # include <stdlib.h>
+# include <fcntl.h>
+
+# define BUFF_SIZE	8
+# define MAX_FD		4096
 
 typedef struct		s_list
 {
@@ -90,5 +94,6 @@ void				ft_printlst(t_list **head);
 void				ft_swap(void *a, void *b, size_t s);
 char				*ft_strrev(char *str);
 int					ft_lstsize(t_list *lst_begin);
+int					get_next_line(const int fd, char **line);
 
 #endif

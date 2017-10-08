@@ -6,11 +6,11 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 15:09:48 by enunes            #+#    #+#             */
-/*   Updated: 2017/10/07 02:24:42 by enunes           ###   ########.fr       */
+/*   Updated: 2017/10/07 20:39:41 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include <fdf.h>
 
 void		set_env(t_fdf *f)
 {
@@ -51,7 +51,7 @@ int		main(int ac, char **av)
 	fdf.map_max = 0;
 	parse_map(&fdf);
 	set_env(&fdf);
-	fdf.env.mlx = mlx.init();
+	fdf.env.mlx = mlx_init();
 	fdf.env.win = mlx_new_window(fdf.env.mlx, fdf.win_x, fdf.win_y, "42-fdf");
 	img_gen(&fdf);
 	controls();

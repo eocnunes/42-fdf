@@ -6,12 +6,12 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 16:53:11 by enunes            #+#    #+#             */
-/*   Updated: 2017/10/07 02:29:30 by enunes           ###   ########.fr       */
+/*   Updated: 2017/10/07 20:59:05 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define FDF_H
-# ifndef FDF_H
+#ifndef FDF_H
+# define FDF_H
 
 # include "libft.h"
 # include <mlx.h>
@@ -51,10 +51,10 @@ typedef struct	s_pxl
 {
 	int			x;
 	int			y;
-	int			z;
+	int			h;
 	int			x1;
 	int			y1;
-	int			z1;
+	int			h1;
 }				t_pxl;
 
 typedef	struct	s_mlx
@@ -84,12 +84,12 @@ typedef struct	s_fdf
 }				t_fdf;
 
 /* --------------------- fdf.c ---------------------- */
-int		fdf(int ac, char **av);
+int		main(int ac, char **av);
 void	set_env(t_fdf *f);
 
 /* -------------------- parser.c -------------------- */
 void	parse_map(t_fdf *f);
-void	alloc_map(t_fdf, int i);
+void	alloc_map(t_fdf *f, int i);
 int		checkch(char *str);
 void	fill_map(t_fdf *f, int x, int y);
 

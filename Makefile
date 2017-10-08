@@ -6,64 +6,75 @@
 #    By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/06 21:27:58 by enunes            #+#    #+#              #
-#    Updated: 2017/10/07 02:13:00 by enunes           ###   ########.fr        #
+#    Updated: 2017/10/07 21:01:22 by enunes           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-N_INC = fdf.h
+CFLAGS = -Wall -Wextra -Werror -g
 
-N_SRCS =	fdf.c		\
-			parser.c	\
-			calculate.c	\
-			draw.c		\
-			screen.c	\
-			keys.c		\
-			tools.c		\
+SRC_FILES = fdf.c \
+			parser.c \
+			calculate.c \
+			draw.c \
+			screen.c \
+			tools.c	\
+			keys.c \
 
-X_LFT = -L$(P_LFT) -lft
-X_MLX = -L$(P_MLX) -lmlx -framework OpenGL -framework AppKit
+OBJ_FILES = $(SRC_FILES:.c=.o)
 
-P_SRCS = srcs/
-P_OBJ = obj/
-I_INC = includes
-I_LFT = libft/includes
-P_LFT = libft
-P_MLX = minilibx
+SRC_DIR = ./srcs/
+OBJ_DIR = ./obj/
+INC_DIR = ./includes/
+MLX_DIR = ./mlx/
+LIBFT_DIR = ./libft/
 
-CC = gcc
-CC_FLAGS = -Wall -Werror -Wextra
+SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
+OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
+MLX = $(addprefix $(MLX_DIR), libmlx.a)
+LIBFT = $(addprefix $(LIBFT_DIR), libft.a)
 
-INC = $(addprefix -I,$(I_INC) $(I_LFT) $(P_MLX))
-SRC = $(addprefix $(P_SRCS),$(N_SRCS))
-OBJ = $(addprefix $(P_OBJ),$(OBJ_NAME))
+LINK = -L $(MLX_DIR) -L $(LIBFT_DIR) \
+				-lmlx -lft -framework OpenGL -framework AppKit
 
-OBJ_NAME = $(N_SRCS:.c=.o)
+all: obj $(LIBFT) $(MLX) $(NAME)
 
-all: $(NAME)
+obj:
+	@mkdir -p $(OBJ_DIR)
 
-project: clean proj
+$(OBJ_DIR)%.o:$(SRC_DIR)%.c
+	@gcc $(CFLAGS) -I $(MLX_DIR) -I $(LIBFT_DIR) -I $(INC_DIR) -o $@ -c $<
+	@echo -n ██████
 
-proj: $(OBJ)
-	@$(CC) $(CC_FLAGS) -o $(NAME) $(OBJ) $(X_LFT) $(X_MLX)
+$(LIBFT):
+	@echo "\033[32mCompiling libft..."
+	@make -C $(LIBFT_DIR)
+	@echo "\033[1;4;32mlibft created.\033[0m"
+
+$(MLX):
+	@echo "\033[32mCompiling mlx...\033[0m"
+	@make -C $(MLX_DIR)
+	@echo "\033[1;4;32mmlx created.\033[0m"
+	@echo  "\033[32mCompiling fdf..."
 
 $(NAME): $(OBJ)
-	@make -C $(P_LFT)
-	@make -C $(P_MLX)
-	@$(CC) $(CC_FLAGS) -o $(NAME) $(OBJ) $(X_LFT) $(X_MLX)
-
-$(P_OBJ)%.o: $(P_SRCS)%.c
-	@mkdir -p $(P_OBJ)
-	@$(CC) $(CC_FLAGS) -o $@ -c $^ $(INC)
+	@gcc $(CFLAGS) $(OBJ) $(LINK) -lm -o $(NAME)
+	@echo "\033[1;4;32m\n$(NAME) Created.\033[0m"
 
 clean:
-	@make -C $(P_LFT) clean
-	@rm -rf $(P_OBJ)
+	@echo "\033[31mRemoving objects...\033[0m"
+	@rm -rf $(OBJ_DIR)
+	@make -C $(LIBFT_DIR) clean
+	@make -C $(MLX_DIR) clean
+	@echo "\033[1;4;31OObjects removed!\033[0m"
 
 fclean: clean
-	@make -C $(P_LFT) fclean
-	@make -C $(P_MLX) clean
+	@echo "\033[31RRemoving fdf...\033[0m"
 	@rm -f $(NAME)
+	@make -C $(LIBFT_DIR) fclean
+	@echo "\033[1;4;31m$(NAME) removed!\033[0m"
 
 re: fclean all
+
+.PHONY: clean fclean all re
