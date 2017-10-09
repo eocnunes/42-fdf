@@ -6,7 +6,7 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 19:05:39 by enunes            #+#    #+#             */
-/*   Updated: 2017/10/08 21:08:44 by enunes           ###   ########.fr       */
+/*   Updated: 2017/10/09 01:09:03 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	controlpanel(void)
 	ft_putstr("\n\t        \e[1;104;97m FDF Controls \e[0m      \n");
 	ft_putendl("\t\e[90m ------ ------ ------ ------\e[0m");
 	ft_putendl("\t\e[90m|   1  |   2  |   3  |   4  |\e[0m");
-	ft_putstr("\t\e[90m| \e[1;91mRED\e[90m  | \e[1;32mGRN\e[90m  | \e[1;34mBLUE\e[90m |      |\e[0m\n");
+	ft_putstr("\t\e[90m| \e[1;91mRED\e[90m  | \e[1;32mGRN\e[90m  | ");
+	ft_putstr("\e[1;34mBLUE\e[90m |      |\e[0m\n");
 	ft_putendl("\t\e[90m ------ ------ ------ ------\e[0m");
 	ft_putendl("\t\e[90m|   Q  |   W  |   E  |   R  |\e[0m");
 	ft_putstr("\t\e[90m| \e[1;36mRotL\e[90m |  \e[1;31mY+\e[90m  | ");
@@ -51,10 +52,10 @@ void	key_controls(int key, t_fdf *f)
 	(key == YNEG) ? f->pos_y -= f->speed : (0);
 	(key == RNEG) ? f->pos_z += f->speed : (0);
 	(key == RPOS) ? f->pos_z -= f->speed : (0);
-	(key == ZPOS && ((f->map_x * f->zoom) < (f->win_x * 0.8))
-	 && ((f->map_y * f->zoom) < (f->win_y * 0.8 ))) ? f->zoom++ : (0);
-	(key == ZNEG && ((f->map_x * f->zoom) > -(f->win_x * 0.8))
-	 && ((f->map_y * f->zoom) < (f->win_y))) ? f->zoom-- : (0);
+	(key == ZPOS && ((f->map_x * f->zoom) < (f->win_x * 0.8)) &&
+		((f->map_y * f->zoom) < (f->win_y * 0.8))) ? f->zoom++ : (0);
+	(key == ZNEG && ((f->map_x * f->zoom) > (f->win_x * 0.1)) &&
+		((f->map_y * f->zoom) > (f->win_y * 0.1))) ? f->zoom-- : (0);
 	(key == RED) ? f->color = 0xed3b3b : (0);
 	(key == GREEN) ? f->color = 0x76ed3b : (0);
 	(key == BLUE) ? f->color = 0x4261ff : (0);
