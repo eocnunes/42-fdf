@@ -6,7 +6,7 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 16:53:11 by enunes            #+#    #+#             */
-/*   Updated: 2017/10/08 21:27:23 by enunes           ###   ########.fr       */
+/*   Updated: 2017/10/09 01:23:37 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void					diag_y(t_fdf *f, t_pxl steps, t_pxl point, float m);
 void					straight(t_fdf *f, t_pxl a, t_pxl b, int sense);
 
 /*
-** --------------------- draw.c ----------------------
+** ------------------- calculate.c -------------------
 */
 int						mlx_img(t_fdf *f, t_pxl a);
 void					recalc(t_fdf *f, int x, int y);
@@ -129,7 +129,7 @@ void					sstrdel(char **s);
 int						sstrlen(char **s);
 
 /*
-** --------------------- tools.c ---------------------
+** --------------------- screen.c --------------------
 */
 void					screeninfo(t_fdf *f);
 void					data_xyz(t_fdf *f, int off_x);
