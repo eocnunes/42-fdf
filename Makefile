@@ -6,7 +6,7 @@
 #    By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/06 21:27:58 by enunes            #+#    #+#              #
-#    Updated: 2017/10/08 05:15:41 by enunes           ###   ########.fr        #
+#    Updated: 2017/10/08 08:46:00 by enunes           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,32 +45,31 @@ obj:
 
 $(OBJ_DIR)%.o:$(SRC_DIR)%.c
 	@gcc $(CFLAGS) -I $(MLX_DIR) -I $(LIBFT_DIR) -I $(INC_DIR) -o $@ -c $<
-	@echo -n ██████
+	@echo -n ████████
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)
-	@echo "\033[32mlibft created!\033[0m"
+	@echo "\033[1;32m> libft created\033[0m"
 
 $(MLX):
 	@make -C $(MLX_DIR)
-	@echo "\033[1;4;32mMlx created!\033[0m"
-	@echo  "\033[32mCompiling..."
+	@echo "\033[1;32m> mlx created\033[0m"
+	@echo "\033[32mCompiling..."
 
 $(NAME): $(OBJ)
 	@gcc $(CFLAGS) $(OBJ) $(LINK) -lm -o $(NAME)
-	@echo "\033[1;4;32m\n$(NAME) Created.\033[0m"
+	@echo "\033[1;32m\n> $(NAME) created\033[0m"
 
 clean:
 	@rm -rf $(OBJ_DIR)
 	@make -C $(LIBFT_DIR) clean
 	@make -C $(MLX_DIR) clean
-	@echo "\033[1;4;31OObjects removed!\033[0m"
+	@echo "\033[31m> objs removed\033[0m"
 
 fclean: clean
-	@echo "\033[31RRemoving fdf...\033[0m"
 	@rm -f $(NAME)
 	@make -C $(LIBFT_DIR) fclean
-	@echo "\033[1;4;31m$(NAME) removed!\033[0m"
+	@echo "\033[1;91m> $(NAME) removed\033[0m"
 
 re: fclean all
 

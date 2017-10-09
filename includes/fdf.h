@@ -6,7 +6,7 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 16:53:11 by enunes            #+#    #+#             */
-/*   Updated: 2017/10/08 07:08:45 by enunes           ###   ########.fr       */
+/*   Updated: 2017/10/08 21:27:23 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <math.h>
 # include <fcntl.h>
 
-# define ERR_ARG		"Error. Usage: ./fdf map.fdf"
+# define ERR_ARG		"Error!   Usage: ./fdf map.fdf"
 # define ERR_OPEN		"Error: failed to open file."
 # define ERR_MALLOC		"Error: malloc failed."
 # define ERR_MAP		"Error: invalid map."

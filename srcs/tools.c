@@ -6,7 +6,7 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 01:40:11 by enunes            #+#    #+#             */
-/*   Updated: 2017/10/07 20:44:24 by enunes           ###   ########.fr       */
+/*   Updated: 2017/10/08 21:25:35 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error(char *message)
 {
-	ft_putendl_fd("\e[1;31mKO\n", 2);
+	ft_putstr_fd("\e[1;31m", 2);
 	ft_putendl_fd(message, 2);
 	ft_putstr_fd("\e[0m", 2);
 	exit(EXIT_FAILURE);

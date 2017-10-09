@@ -6,7 +6,7 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 22:51:33 by enunes            #+#    #+#             */
-/*   Updated: 2017/10/08 06:44:37 by enunes           ###   ########.fr       */
+/*   Updated: 2017/10/09 00:01:19 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int			checkch(char *str)
 		t++;
 	while (str && str[t])
 	{
-		if ((str[t] >= 48 && str[t] <= 58) || str[t] == 32 || str[t] == '-')
+		if ((str[t] >= 48 && str[t] <= 57) || str[t] == 32 || str[t] == '-')
 			t++;
 		else
 			return (0);
